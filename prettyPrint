@@ -1,0 +1,94 @@
+public static ArrayList<ArrayList<Integer>> prettyPrint(int a) {
+	    // Result 2d list
+	    ArrayList<ArrayList<Integer>> resultList = new ArrayList<>();
+	    // Check the corner case
+	    if (a <= 0) {
+	        return resultList;
+	    }
+	    // Caculate the length of the matrix
+	    int n = 2 * a - 1;
+	    // Construct the result matrix
+	    int[][] result = new int[n][n];
+	    // Value to be printed
+	    int num;
+	    // Pointers to help move left and right
+	    int i = 0;
+	    int j = 0;
+	    // A flag to keep track of the direction
+	    int dir = 0;
+	    int counter = 0;
+	    // Iterate from outer loop to inner loop
+	    for (num = a; num > 0; num--) {
+	    	i = j = counter;
+	    	counter++;
+	        // Calculate the total number of numbers to print in this loop
+	        int circle_size;
+	        if (num != 1) {
+	            // number of elements of the outer loop is equal to
+	            // the total number of elements minus the number 
+	            // of elements in inner rectangel
+	            circle_size = (2 * num - 1) * (2 * num - 1) - 
+	                          (2 * num - 3) * (2 * num - 3);
+	        }else{
+	            circle_size = num;
+	        }
+//	        System.out.println(circle_size);
+	        // Counter to keep track of the number of printed elements
+	        int count = 0;
+	        // Print the circle
+	        while (count < circle_size) {
+	            System.out.println("num" + num);
+		        System.out.println("i:" + i);
+                System.out.println("j:" + j);
+	            count ++;
+	            result[i][j] = num;
+	            if (dir == 0) {
+	            	System.out.println("r");
+	                j++; // Keep moving to the right
+	                // Check if out of boundary
+	                System.out.println("current counter" + counter);
+	                if (j == n + 1 - counter) {
+	                    dir = 1; // Change direction	                    
+	                    j--; // Move one step left
+	                    i++; // Move to the next row
+	                }
+	            } else if (dir == 1) {
+	            	System.out.println("d");
+                    i++; // Keep moving down
+                    // Check if out of boundary
+                    if (i == n + 1 - counter) {
+                        dir = 2;
+                        i--; // Move one step up
+                        j--; // Move to the left column
+                    }
+	            } else if (dir == 2) {
+	            	System.out.println("l");
+                    j--; // Keep moving to the left
+                    if (j < counter - 1) {
+                       dir = 3;
+                       j++;
+                       i--;
+                    }
+	            } else {
+	            	System.out.println("u");
+                    i--; // Keep moving up
+                    if (i < counter - 1) {
+                        dir = 0;
+                        i++;
+                        j++;
+                    }
+	            }
+	        }
+	        dir = 0;
+	    }
+	    
+    	// Add the result to the arraylist
+    	for (int l = 0; l < n; l++) {
+    	    ArrayList<Integer> row = new ArrayList<>();
+    	    for (int k = 0; k < n; k++) {
+    	        row.add(result[l][k]);
+    	    }
+    	    resultList.add(row);
+    	}
+    	return resultList;
+	}
