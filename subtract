@@ -1,0 +1,96 @@
+public class Solution {
+    
+    public ListNode append(ListNode head, int val) {
+		ListNode newTail = new ListNode(val);
+		
+		if (head == null) {
+			return newTail;
+		}
+		
+		ListNode cur = head;
+		while (cur.next != null) {
+			cur = cur.next;
+		}
+		cur.next = newTail;
+	    return head;
+	}
+	
+	public ListNode reverse(ListNode halfHead) {
+		ListNode cur = halfHead;
+		ListNode pre = null;
+		while (cur != null) {
+			ListNode next = cur.next;
+			cur.next = pre;
+			pre = cur;
+			cur = next;
+		}
+		return pre;
+	}
+		
+	public ListNode cutList(ListNode head, int L) {
+		ListNode cur = head;
+		ListNode newHead = head;
+		int halfLength = 0;
+		if (L % 2 == 0) {
+			halfLength = L/2;
+		}else{
+			halfLength = L/2 + 1;
+		}
+		for (int i = 0; i < halfLength; i++) {
+			newHead = cur.next;
+			cur = cur.next;
+		}
+		return newHead;	
+	}
+	
+	public int getLength(ListNode head) {
+		int count = 0;
+		if (head == null) {
+			return count;
+		}
+		while (head != null) {
+		    count++;
+		    head = head.next;
+		}
+		return count;
+	}
+	
+	public ListNode subtraction(ListNode head, ListNode reversedList) {
+		ListNode cur = head;
+		ListNode curR = reversedList;
+		while (curR != null) {
+			cur.val = curR.val - cur.val;
+			cur = cur.next;
+			curR = curR.next;
+		}
+		return head;
+	}
+	
+	public ListNode copy(ListNode head) {
+		ListNode copyHead = new ListNode(head.val);
+		while(head.next != null) {
+			append(copyHead,head.next.val);
+			head = head.next;
+		}
+		//printList(copyHead);
+	    return copyHead;
+	}
+	
+	public ListNode subtract(ListNode head) {
+		if (head == null) {
+			return head;
+		}
+		//printList(head);
+		int L = getLength(head);
+		if (L == 1) {
+			return head;
+		}
+		ListNode halfList = cutList(head, L);
+		//printList(halfList);
+		ListNode newHalfList = copy(halfList);
+		//printList(newHalfList);
+		ListNode reversedList = reverse(newHalfList);
+		return subtraction(head, reversedList);
+	}
+
+}
