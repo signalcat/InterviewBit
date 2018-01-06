@@ -1,0 +1,53 @@
+public class Solution {
+  // DO NOT MODIFY THE LIST. IT IS READ ONLY
+  public int findMin(List<Integer> arr) {
+    int result = arr.get(0);
+    for (int i = 1; i < arr.size(); i++) {
+      if (arr.get(i) > result) {
+        continue;
+      } else {
+        result = arr.get(i);
+      }
+    }
+    return result;
+  }
+
+  public int findMax(List<Integer> arr) {
+    int result = arr.get(0);
+    for (int i = 1; i < arr.size(); i++) {
+      if (arr.get(i) < result) {
+        continue;
+      } else {
+        result = arr.get(i);
+      }
+    }
+    return result;
+  }
+
+  public int find (final List<Integer> arr, int k) {
+    int low = findMin(arr);
+    int high = findMax(arr);
+    while (low <= high) {
+      int mid = (low + high)/2;
+      if (count(arr, mid) >= k) {
+        if (count(arr, mid - 1) < k) {
+          return mid;
+        }
+        high = mid - 1;
+      } else if (count(arr, mid) < k) {
+        low = mid + 1;
+      }
+    }
+    return low;
+  }
+
+  public int count(List<Integer> arr, int max) {
+    int num = 0;
+    for (int i = 0; i< arr.size(); i++) {
+      if (arr.get(i) <= max) {
+        num++;
+      }
+    }
+    return num;
+  }
+}
