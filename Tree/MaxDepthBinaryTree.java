@@ -1,7 +1,6 @@
 
 public class MaxDepthBinaryTree {
-	public class Solution {
-	    public int maxDepth(TreeNode A) {
+	 public int maxDepth(TreeNode A) {
 	        if (A == null) {
 	            return 0;
 	        }
@@ -9,5 +8,4 @@ public class MaxDepthBinaryTree {
 	        int right = maxDepth(A.right);
 	        return Math.max(left, right) + 1;
 	    }
-	}
 }

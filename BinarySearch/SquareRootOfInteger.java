@@ -6,15 +6,15 @@
 //Output : 3
 
 public class SquareRootOfInteger {
-	public static long sqrt(int a) {
-		if (a == 0 || a == 1) {
+	public long sqrt(int a) {
+	    if (a == 0 || a == 1) {
 			return a;
 		}
 		
-		long start = 1, end = x;
+		long start = 1, end = a;
 		long result = 0;
 		while(start <= end) {
-			int mid = (start + end) / 2;
+			long mid = (start + end) / 2;
 			if (mid * mid == a) {
 				return mid;
 			}
@@ -26,10 +26,5 @@ public class SquareRootOfInteger {
 			}
 		}
 		return result;
-	}
-	
-	public static void main (String[] args) {
-		int result = sqrt(11);
-		System.out.print(result);
-	}
+	}	
 }
