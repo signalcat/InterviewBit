@@ -21,7 +21,6 @@ public class BlackShape {
 	    }
 	    arr[r][c] = 'F';
 	    
-	    
 		dfs(arr, r-1, c);
 		dfs(arr, r+1, c);
 		dfs(arr, r, c-1);
